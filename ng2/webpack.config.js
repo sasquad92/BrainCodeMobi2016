@@ -144,6 +144,11 @@ module.exports = {
       // Typescript loader support for .ts and Angular 2 async routes via .async.ts
       //
       // See: https://github.com/s-panferov/awesome-typescript-loader
+      {test: /\.scss$/, loader: ['raw-loader','sass-loader'], exclude: []},
+
+      // Typescript loader support for .ts and Angular 2 async routes via .async.ts
+      //
+      // See: https://github.com/s-panferov/awesome-typescript-loader
       {test: /\.ts$/, loader: 'awesome-typescript-loader', exclude: [/\.(spec|e2e)\.ts$/]},
 
       // Json loader support for *.json files.
