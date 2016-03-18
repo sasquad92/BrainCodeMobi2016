@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
+    "github.com/sasquad92/BrainCodeMobi2016/gpio"
 )
 
 func SayHelloWorld(w http.ResponseWriter, r *http.Request) {
@@ -28,18 +29,19 @@ func ProcessPathVariables(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
+        
 	mx := mux.NewRouter()
-
-	mx.HandleFunc("/", SayHelloWorld)
-	mx.HandleFunc("/{name}", Greet)
-
+    
+    mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
 	//to handle URL like
 	//http://website:8080/person/Boo/CEO/199
 
 	//http://website:8080/person/Boo/CEO/199 <- if age > 199, will cause 404 error
+    
+    gpio.GameOver()
 
-	mx.HandleFunc("/person/{name}/{job}/{age:[0-199]+}", ProcessPathVariables)
+	if err := http.ListenAndServe(":8080", mx); err != nil {
+        panic(err)
+    }
 
-	http.ListenAndServe(":8080", mx)
 }
