@@ -2,7 +2,7 @@ package gpio
 
 import (
     "github.com/stianeikeland/go-rpio"
-    "time"
+    //"time"
 )
 
 // Open memory range for GPIO access
@@ -27,11 +27,6 @@ func GameOver() {
         pin := rpio.Pin(26)
         
         pin.Output()
-        //pin.High()
-        
-        for i := 0; i < 20; i++ {
-            pin.Toggle()
-            time.Sleep(time.Second / 5)
-        }
+        pin.High()
     }
 }
