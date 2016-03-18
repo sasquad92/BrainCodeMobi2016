@@ -22,3 +22,26 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Node Files #
+/node_modules
+/bower_components
+npm-debug.log
+
+# Coverage #
+/ng2/coverage/
+
+# Typing #
+/ng2/src/typings/tsd/
+/ng2/typings/
+/ng2/tsd_typings/
+
+# Dist #
+/ng2/dist
+/ng2/public/__build__/
+/ng2/src/*/__build__/
+/ng2/__build__/**
+/ng2/public/dist/
+/ng2/src/*/dist/
+/ng2/dist/**
+/ng2/.webpack.json
