@@ -12,23 +12,34 @@ import {Home} from './home/home';
  */
 @Component({
   selector: 'app',
-  pipes: [ ],
-  providers: [ ],
-  directives: [ ],
+  pipes: [],
+  providers: [],
+  directives: [],
   styles: [require('./app.scss')],
   template: require('./app.html')
 })
-@RouteConfig([
+/*@RouteConfig([
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
-])
+])*/
 export class App {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
+  /*angularclassLogo = 'assets/img/angularclass-avatar.png';
   name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+  url = 'https://twitter.com/AngularClass';*/
+  classMap:string = "" //{ [key: string]: boolean; }
+
   constructor() {
+    this.classMap = "";//{ 'class1': true, 'class2': false };
+
+    var that = this;
+    var i: number = 1;
+    setInterval(() => {
+      i++
+      that.classMap = 'in-room' + i;
+      if(i==11) i =0;
+    }, 1000)
   }
 }
 

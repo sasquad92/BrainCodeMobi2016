@@ -13,7 +13,7 @@
   width: 17%;
   height: 31%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room2 {
   position: absolute;
@@ -22,7 +22,7 @@
   width: 42.5%;
   height: 22%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room3 {
   position: absolute;
@@ -31,7 +31,7 @@
   width: 42.5%;
   height: 35%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room4 {
   .room4-1 {
@@ -41,7 +41,7 @@
     width: 17%;
     height: 9%;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
   }
   .room4-2 {
     position: absolute;
@@ -50,10 +50,18 @@
     width: 34%;
     height: 15%;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
   }
 }
-.room5 {}
+.room5 {
+  position: absolute;
+  top: 68%;
+  left: 78.5%;
+  width: 13.5%;
+  height: 23.5%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.7);
+}
 .room6 {
   position: absolute;
   top: 42.5%;
@@ -61,7 +69,7 @@
   width: 9.5%;
   height: 14.5%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room7 {
   position: absolute;
@@ -70,7 +78,7 @@
   width: 16.5%;
   height: 34%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room8 {
   position: absolute;
@@ -79,16 +87,16 @@
   width: 17.5%;
   height: 34.5%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room9 {
   position: absolute;
   top: 68%;
   left: 49.5%;
-  width: 42.5%;
+  width: 29%;
   height: 23.5%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 .room10 {
   position: absolute;
@@ -97,29 +105,123 @@
   width: 17%;
   height: 22%;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
-
 .room {
   &:hover,
   &:hover .section {
-    background: rgba(200, 200, 200, 0.4)
+    background: rgba(200, 0, 0, 0.5);
   }
 }
-
-nav {
-  background: red;
+@mixin in-room() {
+  &,
+  .section {
+    background: rgba(200, 200, 200, 0.1);
+  }
 }
-nav ul {
-  display: inline;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 60px;
+@mixin to-room() {
+  &,
+  .section {
+    background: rgba(0, 0, 200, 0.4);
+  }
+  &:hover,
+  &:hover .section {
+    background: rgba(0, 200, 0, 0.1);
+  }
 }
-nav li {
-  display: inline;
+.in-room1 {
+  .room1 {
+    @include in-room();
+  }
+  .room4,
+  .room10 {
+    @include to-room();
+  }
 }
-nav li.active {
-  background-color: lightgray;
+.in-room2 {
+  .room2 {
+    @include in-room();
+  }
+  .room3,
+  .room10 {
+    @include to-room();
+  }
+}
+.in-room3 {
+  .room3 {
+    @include in-room();
+  }
+  .room4,
+  .room9,
+  .room5,
+   {
+    @include to-room();
+  }
+}
+.in-room4 {
+  .room4 {
+    @include in-room();
+  }
+  .room1,
+  .room3,
+  .room6,
+  .room7,
+  .room8,
+  .room10 {
+    @include to-room();
+  }
+}
+.in-room5 {
+  .room5 {
+    @include in-room();
+  }
+  .room3,
+  .room9 {
+    @include to-room();
+  }
+}
+.in-room6 {
+  .room6 {
+    @include in-room();
+  }
+  //game finish
+}
+.in-room7 {
+  .room7 {
+    @include in-room();
+  }
+  .room4,
+  .room8 {
+    @include to-room();
+  }
+}
+.in-room8 {
+  .room8 {
+    @include in-room();
+  }
+  .room7,
+  .room4,
+  .room9 {
+    @include to-room();
+  }
+}
+.in-room9 {
+  .room9 {
+    @include in-room();
+  }
+  .room8,
+  .room5,
+  .room3 {
+    @include to-room();
+  }
+}
+.in-room10 {
+  .room10 {
+    @include in-room();
+  }
+  .room1,
+  .room2,
+  .room4 {
+    @include to-room();
+  }
 }
