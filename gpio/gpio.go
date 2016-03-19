@@ -45,7 +45,7 @@ func InitPins() (err error) {
     
     // setting low-state
     
-    // pin11.Output()
+    pin11.Output()
     // pin13.Output()
 	// pin15.Output()
 	// pin16.Output()
@@ -83,7 +83,7 @@ func InitPins() (err error) {
 	pin24.Input()
 	pin26.Input()
     
-    pin11.PullDown()
+    pin11.Low()
     pin13.PullDown()
 	pin15.PullDown()
 	pin16.PullDown()

@@ -3,7 +3,7 @@ package main
 import (
 	//"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
+	//	"github.com/gorilla/mux"
 	"github.com/sasquad92/BrainCodeMobi2016/gpio"
 	"github.com/sasquad92/BrainCodeMobi2016/rooms"
 	"net/http"
@@ -33,7 +33,7 @@ func AskRPi() {
 		panic(err)
 	}
 	murPos = data.Murderer*/
-    murPos = 1 // test
+	murPos = 1 // test
 }
 
 func BoardHandler(w http.ResponseWriter, r *http.Request) {
@@ -48,19 +48,23 @@ func main() {
 
 	err := gpio.InitPins()
 
+	defer gpio.PinsOff()
+
+	gpio.Blink26()
+
 	if err == nil {
 
 		AskRPi()
 
-		mx := mux.NewRouter()
-
-		mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
-		mx.HandleFunc("/board", BoardHandler)
-
-		if err := http.ListenAndServe(":80", mx); err != nil {
-			panic(err)
-			fmt.Println("ListenAndServe error.")
-		}
+		//		mx := mux.NewRouter()
+		//
+		//		mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
+		//		mx.HandleFunc("/board", BoardHandler)
+		//
+		//		if err := http.ListenAndServe(":80", mx); err != nil {
+		//			panic(err)
+		//			fmt.Println("ListenAndServe error.")
+		//		}
 
 		t := time.NewTicker(3 * time.Second)
 
@@ -79,8 +83,6 @@ func main() {
 
 			<-t.C
 		}
-
-		gpio.PinsOff()
 
 	} else {
 		fmt.Println("Error while maping pins on Raspberry Pi.", err)
