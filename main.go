@@ -1,13 +1,13 @@
 package main
 
 import (
-	"encoding/json"
-	//"fmt"
-	//"github.com/gorilla/mux"
+	//"encoding/json"
+	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/sasquad92/BrainCodeMobi2016/gpio"
 	"github.com/sasquad92/BrainCodeMobi2016/rooms"
 	"net/http"
-	//"time"
+	"time"
 )
 
 var vicPos int
@@ -17,7 +17,7 @@ func AskRPi() {
 
 	vicPos = gpio.Listen()
 
-	resp, err := http.Get("http://192.168.0.105/boardMur")
+	/*resp, err := http.Get("http://192.168.0.105/boardMur")
 
 	if err != nil {
 		panic(err)
@@ -32,7 +32,8 @@ func AskRPi() {
 	if err != nil {
 		panic(err)
 	}
-	murPos = data.Murderer
+	murPos = data.Murderer*/
+    murPos = 1 // test
 }
 
 func BoardHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,12 +46,6 @@ func BoardHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-    //tmp
-    gpio.InitPins()
-    gpio.Blink26()
-    gpio.PinsOff()
-    
-    /*
 	err := gpio.InitPins()
 
 	if err == nil {
@@ -90,5 +85,4 @@ func main() {
 	} else {
 		fmt.Println("Error while maping pins on Raspberry Pi.", err)
 	}
-*/
 }
