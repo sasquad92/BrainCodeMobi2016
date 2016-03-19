@@ -20,6 +20,9 @@ type Place struct {
     Murderer int `json:"murderer"`
 }
 
+
+type Places [10]Place
+
 // ExportToJSON returns []byte
 func ExportToJSON(vic int, mur int) []byte {
     
