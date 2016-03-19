@@ -43,7 +43,35 @@ func InitPins() (err error) {
 	pin24 = rpio.Pin(8)
 	pin26 = rpio.Pin(7)
     
+    // setting low-state
+    
     pin11.Output()
+    pin13.Output()
+	pin15.Output()
+	pin16.Output()
+	pin18.Output()
+	pin19.Output()
+	pin21.Output()
+	pin22.Output()
+	pin23.Output()
+	pin24.Output()
+	pin26.Output()
+    
+    pin11.Low()
+    pin13.Low()
+	pin15.Low()
+	pin16.Low()
+	pin18.Low()
+	pin19.Low()
+	pin21.Low()
+	pin22.Low()
+	pin23.Low()
+	pin24.Low()
+	pin26.Low()
+    
+    
+    // setting to input mode
+    
     pin13.Input()
 	pin15.Input()
 	pin16.Input()
