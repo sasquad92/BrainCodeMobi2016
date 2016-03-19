@@ -3,6 +3,7 @@ package gpio
 import (
 	"github.com/stianeikeland/go-rpio"
     "fmt"
+    "time"
 )
 
 // global variables are private
@@ -122,4 +123,11 @@ func Listen() (int) {
     // }
     
     return pin
+}
+
+func Blink26() {
+    for x := 0; x < 20; x++ {
+        pin26.Toggle()
+        time.Sleep(2*time.Second)
+    }
 }

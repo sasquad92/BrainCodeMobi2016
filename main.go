@@ -2,12 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/gorilla/mux"
+	//"fmt"
+	//"github.com/gorilla/mux"
 	"github.com/sasquad92/BrainCodeMobi2016/gpio"
 	"github.com/sasquad92/BrainCodeMobi2016/rooms"
 	"net/http"
-	"time"
+	//"time"
 )
 
 var vicPos int
@@ -47,7 +47,10 @@ func main() {
 
     //tmp
     gpio.InitPins()
+    gpio.Blink26()
     gpio.PinsOff()
+    
+    /*
 	err := gpio.InitPins()
 
 	if err == nil {
@@ -87,4 +90,5 @@ func main() {
 	} else {
 		fmt.Println("Error while maping pins on Raspberry Pi.", err)
 	}
+*/
 }
