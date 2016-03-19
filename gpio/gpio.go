@@ -41,7 +41,7 @@ func InitPins() (err error) {
 	pin22 = rpio.Pin(22)
 	pin23 = rpio.Pin(23)
 	pin24 = rpio.Pin(24)
-	pin26 = rpio.Pin(26)
+	pin26 = rpio.Pin(7)
     
     pin11.Output()
     pin13.Input()
