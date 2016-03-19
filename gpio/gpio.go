@@ -2,7 +2,6 @@ package gpio
 
 import (
 	"github.com/stianeikeland/go-rpio"
-    //"os"
     "fmt"
 )
 
@@ -29,7 +28,6 @@ func InitPins() (err error) {
     if err != nil {
         fmt.Println(err)
         fmt.Println("Error with mapping memory (RPi)")
-        //os.Exit(1)
     }
     
 	pin13 = rpio.Pin(13)
