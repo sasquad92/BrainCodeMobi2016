@@ -74,7 +74,7 @@ func PinsOff() {
 // Returns 0 when all circuits are open
 // To change, becouse it is handing is STUPID!
 func Listen() (int) {
-    var pin int
+    var pin int // room id
     
     res13 := pin13.Read()
     res15 := pin15.Read()
@@ -88,34 +88,34 @@ func Listen() (int) {
     res26 := pin26.Read()
     
     if res13 > 1 {
-        pin = 13
+        pin = 1
     }
     if res15 > 1 {
-        pin = 15
+        pin = 2
     }
     if res16 > 1 {
-        pin = 16
+        pin =3
     }
     if res18 > 1 {
-        pin = 18
+        pin = 4
     }
     if res19 > 1 {
-        pin = 19
+        pin = 5
     }
     if res21 > 1 {
-        pin = 21
+        pin = 6
     }
     if res22 > 1 {
-        pin = 22
+        pin = 7
     }
     if res23 > 1 {
-        pin = 23
+        pin = 8
     }
     if res24 > 1 {
-        pin = 24
+        pin = 9
     }
     if res26 > 1 {
-        pin = 26
+        pin = 10
     }
     
     return pin
