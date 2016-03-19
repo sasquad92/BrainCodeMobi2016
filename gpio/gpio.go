@@ -2,8 +2,8 @@ package gpio
 
 import (
 	"github.com/stianeikeland/go-rpio"
-    //"os"
     "fmt"
+    "time"
 )
 
 // global variables are private
@@ -29,34 +29,36 @@ func InitPins() (err error) {
     if err != nil {
         fmt.Println(err)
         fmt.Println("Error with mapping memory (RPi)")
-        //os.Exit(1)
     }
     
-	pin13 = rpio.Pin(13)
-	pin15 = rpio.Pin(15)
-	pin16 = rpio.Pin(16)
-	pin18 = rpio.Pin(18)
-	pin19 = rpio.Pin(19)
-	pin21 = rpio.Pin(21)
-	pin22 = rpio.Pin(22)
-	pin23 = rpio.Pin(23)
-	pin24 = rpio.Pin(24)
-	pin26 = rpio.Pin(26)
+    pin11 = rpio.Pin(17)
+	pin13 = rpio.Pin(27)
+	pin15 = rpio.Pin(22)
+	pin16 = rpio.Pin(23)
+	pin18 = rpio.Pin(24)
+	pin19 = rpio.Pin(10)
+	pin21 = rpio.Pin(9)
+	pin22 = rpio.Pin(25)
+	pin23 = rpio.Pin(11)
+	pin24 = rpio.Pin(8)
+	pin26 = rpio.Pin(7)
     
-    return err
-}
-
-// GameOver puts high state on pin11
-func GameOver() {
-
-		pin11.Output()
-		pin11.High()
-}
-
-// PinsOff puts low state to all needed pins and unmaps memmory
-func PinsOff() {
-
-	pin13.Low()
+    // setting low-state
+    
+    pin11.Output()
+    pin13.Output()
+	pin15.Output()
+	pin16.Output()
+	pin18.Output()
+	pin19.Output()
+	pin21.Output()
+	pin22.Output()
+	pin23.Output()
+	pin24.Output()
+	pin26.Output()
+    
+    pin11.Low()
+    pin13.Low()
 	pin15.Low()
 	pin16.Low()
 	pin18.Low()
@@ -66,7 +68,35 @@ func PinsOff() {
 	pin23.Low()
 	pin24.Low()
 	pin26.Low()
+    
+    
+    // setting to input mode
+    
+    pin13.Input()
+	pin15.Input()
+	pin16.Input()
+	pin18.Input()
+	pin19.Input()
+	pin21.Input()
+	pin22.Input()
+	pin23.Input()
+	pin24.Input()
+	pin26.Input()
+    
+    return err
+}
 
+// GameOver puts high state on pin11
+func GameOver() {
+
+		pin11.High()
+}
+
+// PinsOff puts low state to all needed pins and unmaps memmory
+func PinsOff() {
+
+    pin11.Low()
+    
 	rpio.Close()
 }
 
@@ -111,12 +141,19 @@ func Listen() (int) {
     if res23 > 1 {
         pin = 8
     }
-    if res24 > 1 {
-        pin = 9
-    }
-    if res26 > 1 {
-        pin = 10
-    }
+     if res24 > 1 {
+         pin = 9
+     }
+     if res26 > 1 {
+         pin = 10
+     }
     
     return pin
+}
+
+func Blink26() {
+    for x := 0; x < 20; x++ {
+        pin26.Toggle()
+        time.Sleep(2*time.Second)
+    }
 }
