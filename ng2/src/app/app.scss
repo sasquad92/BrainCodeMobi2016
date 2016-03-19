@@ -1,10 +1,21 @@
+html, body, .app {
+  width: 100%;
+  height: 100%;
+}
+
 .map {
-  position: absolute;
+  position: absolute;;
   top: 0;
   right: 0;
   width: 100%;
   height: 100%;
   z-index: 10;
+}
+h3 {
+  position: absolute;
+  color: rgba(200, 200, 200, 0.8);
+  top: 0;
+  left: 10px;
 }
 .room1 {
   position: absolute;
@@ -223,5 +234,41 @@
   .room2,
   .room4 {
     @include to-room();
+  }
+}
+@mixin noselect() {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+.menu {
+  .title {
+    background: rgba(255, 215, 0, 1);
+    color: rgba(0, 0, 0, 1);
+    font-size: 1.8em;
+    text-align: center;
+    @include noselect();
+  }
+  .option {
+    text-align: center;
+    padding: 10px 0;
+    display: block;
+    cursor: pointer;
+    font-size: 2.3em;
+    color: rgba(200, 200, 200, 0.8);
+    &:hover {
+      background:: rgba(200, 200, 200, 0.8);
+      color: rgba(0, 0, 0, 0.8);
+    }
   }
 }

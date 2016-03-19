@@ -1,4 +1,38 @@
-<div class="app in-room" [class]="classMap">
+<div class="menu" *ngIf="mode==''">
+  <div class="title">
+    I. G. P.
+  </div>
+  <div class="option" (click)="mode='killer'">
+    I am killer
+  </div>
+  <div class="option" (click)="mode='homelord'">
+    I am homelord
+  </div>
+  <!-- <div class="option" (click)="mode='visitor'">
+    I am visitor
+  </div>-->
+</div>
+
+<div class="app in-room" [class]="classMap" *ngIf="mode=='visitor' || mode=='killer'">
+  <h3>Killer</h3>
+  <img class="map" src="/assets/img/map.png" />
+  <div class="room room1"></div>
+  <div class="room room2"></div>
+  <div class="room room3"></div>
+  <div class="room room4">
+    <div class="section main-section room4-1"></div>
+    <div class="section room4-2"></div>
+  </div>
+  <div class="room room5"></div>
+  <div class="room room6"></div>
+  <div class="room room7"></div>
+  <div class="room room8"></div>
+  <div class="room room9"></div>
+  <div class="room room10"></div>
+</div>
+
+<div class="app in-room" [class]="classMap" *ngIf="mode=='visitor' || mode=='homelord'">
+  <h3>Homelord</h3>
   <img class="map" src="/assets/img/map.png" />
   <div class="room room1"></div>
   <div class="room room2"></div>
