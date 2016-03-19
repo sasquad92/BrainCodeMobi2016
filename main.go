@@ -5,8 +5,9 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
     "github.com/sasquad92/BrainCodeMobi2016/gpio"
+    "github.com/sasquad92/BrainCodeMobi2016/rooms"
 )
-
+/*
 func SayHelloWorld(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello, World!"))
 }
@@ -27,21 +28,40 @@ func ProcessPathVariables(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("Job is %s ", job)))
 	w.Write([]byte(fmt.Sprintf("Age is %s ", age)))
 }
+*/
+
+func BoardHandler(w http.ResponseWriter, r *http.Request) {
+    vic := gpio.Listen()
+    // here id of murderer needed from another device
+    mur := 4 // for tests
+    
+    b := rooms.ExportToJSON(vic, mur)
+    
+    w.Write(b)
+}
+
 
 func main() {
+    
+    gpio.InitPins()
         
 	mx := mux.NewRouter()
     
     mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
-	//to handle URL like
-	//http://website:8080/person/Boo/CEO/199
-
-	//http://website:8080/person/Boo/CEO/199 <- if age > 199, will cause 404 error
+    mx.HandleFunc("/board", BoardHandler)
     
-    gpio.GameOver()
-
+    //if err := gpio.InitPins(); err != nil {
+        //gpio.GameOver()
+        // sth
+        // sth
+        // sth
+    
+        //gpio.PinsOff()
+    //}
+        
 	if err := http.ListenAndServe(":8080", mx); err != nil {
         panic(err)
+        fmt.Println("ListenAndServe error.")
     }
 
 }
