@@ -25,7 +25,7 @@ func main() {
 	//mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
 	mx.HandleFunc("/boardMur", MurdererHandler)
 
-	if err := http.ListenAndServe(":8080", mx); err != nil {
+	if err := http.ListenAndServe(":80", mx); err != nil {
 		panic(err)
 		fmt.Println("ListenAndServe error.")
 	}

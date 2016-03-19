@@ -30,6 +30,7 @@ func InitPins() (err error) {
         fmt.Println("Error with mapping memory (RPi)")
     }
     
+    pin11 = rpio.Pin(11)
 	pin13 = rpio.Pin(13)
 	pin15 = rpio.Pin(15)
 	pin16 = rpio.Pin(16)
@@ -41,30 +42,34 @@ func InitPins() (err error) {
 	pin24 = rpio.Pin(24)
 	pin26 = rpio.Pin(26)
     
+    pin11.Output()
+    pin13.Input()
+	pin15.Input()
+	pin16.Input()
+	pin18.Input()
+	pin19.Input()
+	pin21.Input()
+	pin22.Input()
+	pin23.Input()
+	pin24.Output()
+	pin26.Output()
+    
     return err
 }
 
 // GameOver puts high state on pin11
 func GameOver() {
 
-		pin11.Output()
 		pin11.High()
 }
 
 // PinsOff puts low state to all needed pins and unmaps memmory
 func PinsOff() {
 
-	pin13.Low()
-	pin15.Low()
-	pin16.Low()
-	pin18.Low()
-	pin19.Low()
-	pin21.Low()
-	pin22.Low()
-	pin23.Low()
-	pin24.Low()
-	pin26.Low()
-
+    pin11.Low()
+    pin24.Low()
+    pin26.Low()
+    
 	rpio.Close()
 }
 
@@ -82,8 +87,8 @@ func Listen() (int) {
     res21 := pin21.Read()
     res22 := pin22.Read()
     res23 := pin23.Read()
-    res24 := pin24.Read()
-    res26 := pin26.Read()
+    //res24 := pin24.Read()
+    //res26 := pin26.Read()
     
     if res13 > 1 {
         pin = 1
@@ -109,12 +114,12 @@ func Listen() (int) {
     if res23 > 1 {
         pin = 8
     }
-    if res24 > 1 {
-        pin = 9
-    }
-    if res26 > 1 {
-        pin = 10
-    }
+    // if res24 > 1 {
+    //     pin = 9
+    // }
+    // if res26 > 1 {
+    //     pin = 10
+    // }
     
     return pin
 }
