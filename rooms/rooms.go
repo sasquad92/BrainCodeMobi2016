@@ -38,3 +38,19 @@ func ExportToJSON(vic int, mur int) []byte {
     
     return b
 }
+
+// SendMurdererPos sends murderer position - vic pos is 0
+func SendMurdererPos(mur int) []byte {
+    
+    place := Place {
+        Victim: 0,
+        Murderer: mur,
+    }
+    
+    b, err := json.Marshal(place)
+    if err != nil {
+        fmt.Println("Error: ", err)
+    }
+    
+    return b
+}

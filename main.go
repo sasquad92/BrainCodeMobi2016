@@ -3,10 +3,15 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/sasquad92/BrainCodeMobi2016/gpio"
+	"github.com/sasquad92/BrainCodeMobi2016/rooms"
 	"net/http"
-    "github.com/sasquad92/BrainCodeMobi2016/gpio"
-    "github.com/sasquad92/BrainCodeMobi2016/rooms"
+	"time"
 )
+
+var vicPos int
+var murPos int
+
 /*
 func SayHelloWorld(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello, World!"))
@@ -30,38 +35,62 @@ func ProcessPathVariables(w http.ResponseWriter, r *http.Request) {
 }
 */
 
-func BoardHandler(w http.ResponseWriter, r *http.Request) {
-    vic := gpio.Listen()
-    // here id of murderer needed from another device
-    mur := 4 // for tests
-    
-    b := rooms.ExportToJSON(vic, mur)
-    
-    w.Write(b)
+func AskRPi() {
+	vicPos = gpio.Listen()
+	// get msg
 }
 
+func BoardHandler(w http.ResponseWriter, r *http.Request) {
+
+	AskRPi()
+	//vic := gpio.Listen()
+	// here id of murderer needed from another device
+	mur := 4 // for tests
+
+	b := rooms.ExportToJSON(vicPos, mur)
+
+	w.Write(b)
+}
 
 func main() {
-    
-    gpio.InitPins()
-        
-	mx := mux.NewRouter()
-    
-    mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
-    mx.HandleFunc("/board", BoardHandler)
-    
-    //if err := gpio.InitPins(); err != nil {
-        //gpio.GameOver()
-        // sth
-        // sth
-        // sth
-    
-        //gpio.PinsOff()
-    //}
-        
-	if err := http.ListenAndServe(":8080", mx); err != nil {
-        panic(err)
-        fmt.Println("ListenAndServe error.")
-    }
 
+	err := gpio.InitPins()
+
+	if err == nil {
+
+		AskRPi()
+
+		mx := mux.NewRouter()
+
+		mx.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
+		mx.HandleFunc("/board", BoardHandler)
+
+		if err := http.ListenAndServe(":8080", mx); err != nil {
+			panic(err)
+			fmt.Println("ListenAndServe error.")
+		}
+
+		t := time.NewTicker(3 * time.Second)
+
+		// cyclic call
+		for {
+
+			AskRPi()
+
+			if vicPos == murPos {
+
+				gpio.GameOver()
+				time.Sleep(10 * time.Second)
+
+				break
+			}
+
+			<-t.C
+		}
+
+		gpio.PinsOff()
+
+	} else {
+		fmt.Println("Error while maping pins on Raspberry Pi.", err)
+	}
 }
