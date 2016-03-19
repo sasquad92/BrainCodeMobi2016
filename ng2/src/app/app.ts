@@ -16,35 +16,7 @@ import {Home} from './home/home';
   providers: [ ],
   directives: [ ],
   styles: [require('./app.scss')],
-  template: `
-    <header>
-      <nav>
-        <h1>Hello {{ name }}</h1>
-        <ul>
-          <li router-active>
-            <a [routerLink]=" ['Index'] ">Index</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['Home'] ">Home</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['About'] ">About</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-      <div>
-        <img [src]="angularclassLogo" width="10%">
-      </div>
-    </footer>
-  `
+  template: require('./app.html')
 })
 @RouteConfig([
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },

@@ -24,9 +24,9 @@ _testmain.go
 *.prof
 
 # Node Files #
-/node_modules
-/bower_components
-npm-debug.log
+/ng2/node_modules
+/ng2/bower_components
+/ng2/npm-debug.log
 
 # Coverage #
 /ng2/coverage/
