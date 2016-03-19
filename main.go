@@ -38,10 +38,20 @@ func main() {
 
 	//http://website:8080/person/Boo/CEO/199 <- if age > 199, will cause 404 error
     
-    gpio.GameOver()
+    
+    if err := gpio.InitPins(); err != nil {
+        //gpio.GameOver()
+        // sth
+        // sth
+        // sth
+    
+        gpio.PinsOff()
+    }
+    
 
 	if err := http.ListenAndServe(":8080", mx); err != nil {
         panic(err)
+        fmt.Println("ListenAndServe error.")
     }
 
 }
